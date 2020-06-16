@@ -32,7 +32,7 @@ function Contact() {
               <h2 className="title-font font-medium text-white tracking-widest text-sm">
                 EMAIL
               </h2>
-              <a className="text-teal-500 leading-relaxed">example@email.com</a>
+              <a href="../" className="text-teal-500 leading-relaxed">example@email.com</a>
               <h2 className="title-font font-medium text-white tracking-widest text-sm mt-4">
                 PHONE
               </h2>
