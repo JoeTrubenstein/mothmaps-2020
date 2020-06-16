@@ -11,7 +11,7 @@ function Hero() {
           </h1>
           <p className="mb-8 leading-relaxed">
             The Mothman is a cryptid being who's legend originated in West
-            Virginia in the 1960's. Since then he's be sighted all over the
+            Virginia in the 1960's. Since then he's been sighted all over the
             world, often claimed to be seen just before some great disaster. Is
             he simply trying to warn us? Or is the Mothman something less
             benevolent? Join a community that's working together to answer these
