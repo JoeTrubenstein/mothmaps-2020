@@ -6,9 +6,6 @@ import { Route, BrowserRouter as Router } from "react-router-dom";
 import { ApolloProvider } from "react-apollo";
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 import { setContext } from "@apollo/link-context";
-import token from "./components/token"
-
-console.log(token)
 
 const httpLink = createHttpLink({
   uri: "https://stitch.mongodb.com/api/client/v2.0/app/mothmaps-kicwt/graphql",

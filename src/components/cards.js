@@ -1,6 +1,7 @@
-import React from "react";
-import { useQuery } from "@apollo/react-hooks";
+import React, {useEffect} from "react";
+import { useQuery} from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
+import token from "../components/token";
 
 const THE_SIGHTINGS = gql`
   query {
@@ -23,10 +24,12 @@ const THE_SIGHTINGS = gql`
 function Cards() {
   const { loading, error, data } = useQuery(THE_SIGHTINGS);
 
-  if (loading) console.log(loading);
+  if (loading) console.log("fetching gql data");
   if (error) console.log(error);
 
-  if (data) console.log(data.sightings);
+  useEffect(() => {
+    console.log(token);
+  }, []);
 
   return (
     <section className="text-gray-500 bg-gray-900 body-font">
@@ -42,7 +45,7 @@ function Cards() {
                         New
                       </span>
                       <span className="font-medium text-xl text-gray-300 title-font">
-                        {''}
+                        {""}
                       </span>
                     </div>
                     <div className="flex-grow pl-6">
