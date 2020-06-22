@@ -21,7 +21,7 @@ function Header() {
         </a>
         <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
           <a href="../" className="mr-5 hover:text-white">Home</a>
-          <a href="../" className="mr-5 hover:text-white">Sightings</a>
+          <a href="../sightings" className="mr-5 hover:text-white">Sightings</a>
           <a href="../" className="mr-5 hover:text-white">More</a>
         </nav>
 
