@@ -1,6 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
+import gql from "graphql-tag";
+import { useMutation } from "@apollo/react-hooks";
+
+const PUSH_SIGHTINGS = gql`
+  mutation AddSighting($sighting: SightingInsertInput!) {
+    sighting: insertOneSighting(data: $sighting) {
+      _id
+      description
+    }
+  }
+`;
 
 function Contact() {
+  // eslint-disable-next-line
+  const [pushSighting, { data }] = useMutation(PUSH_SIGHTINGS);
+  const [description, setDescription] = useState("none yet");
+  const [sightingObject, setSightingObject] = useState({});
+
+  function collectDescription(event) {
+    setDescription(event.target.value);
+    setSightingObject({
+      description: description,
+    });
+    console.log(sightingObject);
+  }
+
   return (
     <section className="text-gray-500 bg-gray-900 body-font relative">
       <div className="container px-5 py-24 mx-auto flex sm:flex-no-wrap flex-wrap">
@@ -32,7 +56,9 @@ function Contact() {
               <h2 className="title-font font-medium text-white tracking-widest text-sm">
                 EMAIL
               </h2>
-              <a href="../" className="text-teal-500 leading-relaxed">example@email.com</a>
+              <a href="../" className="text-teal-500 leading-relaxed">
+                example@email.com
+              </a>
               <h2 className="title-font font-medium text-white tracking-widest text-sm mt-4">
                 PHONE
               </h2>
@@ -64,11 +90,21 @@ function Contact() {
             type="text"
           />
           <textarea
+            onChange={(e) => {
+              collectDescription(e);
+            }}
             className="bg-gray-800 rounded border border-gray-700 focus:outline-none h-32 focus:border-teal-500 text-base text-white px-4 py-2 mb-4 resize-none"
             placeholder="Description"
             defaultValue={""}
           />
-          <button className="text-white bg-teal-500 border-0 py-2 px-6 focus:outline-none hover:bg-teal-600 rounded text-lg">
+          <button
+            onClick={() => {
+              pushSighting({ variables: { sighting: sightingObject } }).then(
+                alert("cheers mate!")
+              );
+            }}
+            className="text-white bg-teal-500 border-0 py-2 px-6 focus:outline-none hover:bg-teal-600 rounded text-lg"
+          >
             Button
           </button>
           <p className="text-xs text-gray-500 mt-3">
