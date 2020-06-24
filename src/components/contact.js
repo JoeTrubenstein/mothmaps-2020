@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
+import Suggest from "./suggest";
 
 const PUSH_SIGHTINGS = gql`
   mutation AddSighting($sighting: SightingInsertInput!) {
     sighting: insertOneSighting(data: $sighting) {
       _id
       description
+      witness
     }
   }
 `;
@@ -14,13 +16,26 @@ const PUSH_SIGHTINGS = gql`
 function Contact() {
   // eslint-disable-next-line
   const [pushSighting, { data }] = useMutation(PUSH_SIGHTINGS);
-  const [description, setDescription] = useState("none yet");
   const [sightingObject, setSightingObject] = useState({});
 
-  function collectDescription(event) {
-    setDescription(event.target.value);
+  function collectWitness(event) {
     setSightingObject({
-      description: description,
+      ...sightingObject,
+      witness: event.target.value,
+    });
+    console.log(sightingObject);
+  }
+  function collectLocation(suggest) {
+    setSightingObject({
+      ...sightingObject,
+      location: suggest,
+    });
+    console.log(sightingObject);
+  }
+  function collectDescription(event) {
+    setSightingObject({
+      ...sightingObject,
+      description: event.target.value,
     });
     console.log(sightingObject);
   }
@@ -73,22 +88,20 @@ function Contact() {
           <p className="leading-relaxed mb-5 text-gray-600">
             Tell us about your encounter
           </p>
+
           <input
+            onChange={(e) => {
+              collectWitness(e);
+            }}
             className="bg-gray-800 rounded border border-gray-700 focus:outline-none focus:border-teal-500 text-base text-white px-4 py-2 mb-4"
             placeholder="Name"
             type="text"
           />
 
-          <input
-            className="bg-gray-800 rounded border border-gray-700 focus:outline-none focus:border-teal-500 text-base text-white px-4 py-2 mb-4"
-            placeholder="Email"
-            type="email"
+          <Suggest
+            collectLocation={collectLocation}
           />
-          <input
-            className="bg-gray-800 rounded border border-gray-700 focus:outline-none focus:border-teal-500 text-base text-white px-4 py-2 mb-4"
-            placeholder="Location"
-            type="text"
-          />
+
           <textarea
             onChange={(e) => {
               collectDescription(e);
@@ -98,15 +111,16 @@ function Contact() {
             defaultValue={""}
           />
           <button
-            onClick={() => {
+            onClick={async () => {
               pushSighting({ variables: { sighting: sightingObject } }).then(
-                alert("cheers mate!")
+                alert("im indrid cold")
               );
             }}
             className="text-white bg-teal-500 border-0 py-2 px-6 focus:outline-none hover:bg-teal-600 rounded text-lg"
           >
             Button
           </button>
+
           <p className="text-xs text-gray-500 mt-3">
             All submissions will be taken seriously and replied to in the order
             in which they were received. Thank you greatly for contributing to
