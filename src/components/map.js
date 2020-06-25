@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  GoogleMap,
-  LoadScript,
-  MarkerClusterer,
-  Marker,
-} from "@react-google-maps/api";
-
+import { GoogleMap, MarkerClusterer, Marker } from "@react-google-maps/api";
 import { useLazyQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import axios from "axios";
@@ -23,8 +17,9 @@ const THE_SIGHTINGS = gql`
 
 const containerStyle = {
   width: "100%",
-  height: "80%",
+  height: "70vh",
   filter: "grayscale(.8) contrast(1.2) opacity(1)",
+  borderRadius: "15px",
 };
 
 const options = {
@@ -77,42 +72,40 @@ function Map() {
   }, []);
 
   const center = {
-    lat: 40.6957755,
-    lng: -73.91706039999997,
+    lat: 38.84452509999999,
+    lng: -82.13708889999998,
   };
 
   return (
-    <section className="text-gray-500 bg-gray-900 body-font relative h-screen py-12">
-      <LoadScript googleMapsApiKey={process.env.REACT_APP_MAP_KEY}>
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          zoom={5}
-          center={center}
-          onLoad={onLoad}
-          onUnmount={onUnmount}
-        >
-          {/* Child components, such as markers, info windows, etc. */}
-          {data ? (
-            <div>
-              <MarkerClusterer options={options}>
-                {(clusterer) =>
-                  data.sightings.map((sight) => (
-                    <Marker
-                      key={createKey(sight.location)}
-                      position={sight.location}
-                      clusterer={clusterer}
-                    />
-                  ))
-                }
-              </MarkerClusterer>
-            </div>
-          ) : (
-            <div>{console.log("markers loading")}</div>
-          )}
+    <section className="bg-gray-900 lg:p-12 md:p-4 sm:p-2">
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        defaultZoom={0}
+        center={center}
+        onLoad={onLoad}
+        onUnmount={onUnmount}
+      >
+        {/* Child components, such as markers, info windows, etc. */}
+        {data ? (
+          <div>
+            <MarkerClusterer options={options}>
+              {(clusterer) =>
+                data.sightings.map((sight) => (
+                  <Marker
+                    key={createKey(sight.location)}
+                    position={sight.location}
+                    clusterer={clusterer}
+                  />
+                ))
+              }
+            </MarkerClusterer>
+          </div>
+        ) : (
+          <div>{console.log("markers loading")}</div>
+        )}
 
-          <></>
-        </GoogleMap>
-      </LoadScript>
+        <></>
+      </GoogleMap>
     </section>
   );
 }

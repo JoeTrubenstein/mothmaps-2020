@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./assets/main.css";
 import App from "./pages/App";
-import Sightings from "./pages/Sightings"
 import { Route, BrowserRouter as Router } from "react-router-dom";
 import { ApolloProvider } from "react-apollo";
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
@@ -33,7 +32,6 @@ const routing = (
     <Router>
       <div>
         <Route exact path="/" component={App} />
-        <Route exact path="/sightings" component={Sightings} />
       </div>
     </Router>
   </ApolloProvider>

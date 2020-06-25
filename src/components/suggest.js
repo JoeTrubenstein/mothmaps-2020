@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import Geosuggest from "react-geosuggest";
-const google = window.google;
+import "../assets/geosuggest.css"
 
 function Suggest(props) {
   const geosuggestEl = useRef(null);
@@ -18,16 +18,19 @@ function Suggest(props) {
     }
   }
 
+  const google = window.google;
+
+
   return (
-    <div>
+    <div         className="bg-gray-800 rounded border border-gray-700 focus:outline-none focus:border-teal-500 text-base text-white px-4 py-2 mb-4"
+    >
       <Geosuggest
-      style={{
-        fontSize:`5rem`
-      }}
-        className="bg-gray-800 rounded border border-gray-700 focus:outline-none focus:border-teal-500 text-base text-white px-4 py-2 mb-4"
+        style={{
+          fontSize: `5rem`,
+        }}
         ref={geosuggestEl}
-        placeholder="Start typing!"
-        initialValue="Hamburg"
+        placeholder="Location"
+        initialValue=""
         fixtures={fixtures}
         onSuggestSelect={onSuggestSelect}
         location={new google.maps.LatLng(53.558572, 9.9278215)}

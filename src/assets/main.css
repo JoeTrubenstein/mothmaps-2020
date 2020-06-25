@@ -7,21 +7,6 @@
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
-.geosuggest__input {
-  background-color: #2d3848;
-  width: 100%;
-}
-
-.geosuggest__suggests--hidden {
-  max-height: 0;
-  overflow: hidden;
-  border-width: 0;
-}
-
-.geosuggest__item--active {
-  background: #267dc0;
-  color: #fff;
-}
 
 html {
   line-height: 1.15; /* 1 */
