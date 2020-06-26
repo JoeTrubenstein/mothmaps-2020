@@ -35,6 +35,7 @@ function Suggest(props) {
         onSuggestSelect={onSuggestSelect}
         location={new google.maps.LatLng(53.558572, 9.9278215)}
         radius="20"
+        name="location"
       />
       {/* <button onClick={() => geosuggestEl.current.focus()}>Focus</button>
       <button onClick={() => geosuggestEl.current.update("New Zealand")}>

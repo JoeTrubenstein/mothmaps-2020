@@ -155,7 +155,7 @@ function Contact() {
             gentrify.
           </p>
         </div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} name="contact" netlify>
           <div className="lg:w-1/2 md:w-2/3 mx-auto">
             <div className="flex flex-wrap -m-2">
               <div className="p-2 w-1/2">
@@ -163,6 +163,7 @@ function Contact() {
                   onChange={(e) => {
                     collectWitness(e);
                   }}
+                  name="name"
                   required
                   className="w-full bg-gray-800 rounded border border-gray-700 text-white focus:outline-none focus:border-teal-500 text-base px-4 py-2"
                   placeholder="Name"
@@ -178,6 +179,7 @@ function Contact() {
                   className="w-full bg-gray-800 rounded border border-gray-700 text-white focus:outline-none focus:border-teal-500 text-base px-4 py-2"
                   placeholder="Email"
                   type="email"
+                  name="email"
                 />
               </div>
               <div className="p-2 w-full">
@@ -189,6 +191,7 @@ function Contact() {
                   className="w-full bg-gray-800 rounded border border-gray-700 text-white focus:outline-none h-48 focus:border-teal-500 text-base px-4 py-2 resize-none block"
                   placeholder="Message"
                   defaultValue={""}
+                  name="description"
                 />
               </div>
               <div className="p-2 w-full focus:border-teal-500">
