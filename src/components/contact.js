@@ -26,7 +26,13 @@ function Contact() {
     setSightingObject({
       ...sightingObject,
       witness: event.target.value,
-      submitDate: new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'long', day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(timestamp)
+      submitDate: new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+      }).format(timestamp),
     });
     console.log(sightingObject);
   }
@@ -53,8 +59,10 @@ function Contact() {
   }
 
   async function handleSubmit(event) {
-    event.preventDefault()
-    await pushSighting({ variables: { sighting: sightingObject } }).then(alert("Thank you for your submission!"))
+    event.preventDefault();
+    await pushSighting({ variables: { sighting: sightingObject } }).then(
+      alert("Thank you for your submission!")
+    );
   }
 
   return (
@@ -155,7 +163,18 @@ function Contact() {
             gentrify.
           </p>
         </div>
-        <form onSubmit={handleSubmit} name="contact" netlify>
+        <form
+          onSubmit={handleSubmit}
+          name="contact"
+          method="POST"
+          netlify-honeypot="bot-field"
+          data-netlify="true"
+        >
+          <p class="hidden">
+            <label>
+              Don’t fill this out if you're human: <input name="bot-field" />
+            </label>
+          </p>
           <div className="lg:w-1/2 md:w-2/3 mx-auto">
             <div className="flex flex-wrap -m-2">
               <div className="p-2 w-1/2">
@@ -206,7 +225,12 @@ function Contact() {
                 </button>
               </div>
               <div className="p-2 w-full pt-8 mt-8 border-t border-gray-800 text-center">
-                <a href="mailto: josephtrubenstein@gmail.com"className="text-teal-500">josephtrubenstein@gmail.com</a>
+                <a
+                  href="mailto: josephtrubenstein@gmail.com"
+                  className="text-teal-500"
+                >
+                  josephtrubenstein@gmail.com
+                </a>
               </div>
             </div>
           </div>
