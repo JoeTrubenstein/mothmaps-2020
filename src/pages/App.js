@@ -4,7 +4,7 @@ import Hero from "../components/hero"
 import Footer from "../components/footer"
 import Header from "../components/header"
 import Cards from "../components/cards"
-import Map from "../components/map"
+import MapSection from "../components/mapSection"
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
       <Header />
       <Hero />
       <Cards />
-      <Map/>
+      <MapSection/>
       <Contact />
       <Footer />
     </div>

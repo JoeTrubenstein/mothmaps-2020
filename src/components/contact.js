@@ -19,7 +19,6 @@ const PUSH_SIGHTINGS = gql`
 const timestamp = Date.now();
 
 function Contact() {
-
   // disabling lint error because we're not using this 'data' variable quite as suggested, but I want to remember it's here
   // eslint-disable-next-line
   const [pushSighting, { data }] = useMutation(PUSH_SIGHTINGS);
@@ -62,12 +61,13 @@ function Contact() {
   async function handleSubmit(event) {
     // need to prevent default or else the page will reload before the data gets sent to mongo
     event.preventDefault();
-    await pushSighting({ variables: { sighting: sightingObject } })
-      .then(setShowModal(true))
+    await pushSighting({ variables: { sighting: sightingObject } }).then(
+      setShowModal(true)
+    );
   }
 
   return (
-    <section className="text-gray-500 bg-gray-900 body-font relative">
+    <section className="text-gray-500 bg-gray-900 body-font">
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-col text-center w-full mb-12">
           <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">
@@ -140,7 +140,14 @@ function Contact() {
           </div>
         </form>
       </div>
-      {showModal ? <div> <Modal title={"thank you"} toggle={setShowModal} /> </div> : <></>}
+      {showModal ? (
+        <div>
+          {" "}
+          <Modal title={"thank you"} toggle={setShowModal} />{" "}
+        </div>
+      ) : (
+        <></>
+      )}
     </section>
   );
 }
