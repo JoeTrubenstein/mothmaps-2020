@@ -59,7 +59,29 @@ function Contact() {
   }
 
   async function handleSubmit(event) {
+    const encode = (data) => {
+      return Object.keys(data)
+        .map(
+          (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+        )
+        .join("&");
+    };
+
     await pushSighting({ variables: { sighting: sightingObject } })
+      .then(
+        fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: encode({ "form-name": "contact", sightingObject }),
+        })
+          .then(() => alert("Success!"))
+          .catch((error) => alert(error))
+      )
+      .catch((err) => {
+        console.log(err);
+      });
+
+    event.preventDefault();
   }
 
   return (
