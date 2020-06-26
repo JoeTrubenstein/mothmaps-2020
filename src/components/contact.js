@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import Suggest from "./suggest";
+import Modal from "./modal";
 
 const PUSH_SIGHTINGS = gql`
   mutation AddSighting($sighting: SightingInsertInput!) {
@@ -18,9 +19,12 @@ const PUSH_SIGHTINGS = gql`
 const timestamp = Date.now();
 
 function Contact() {
+
+  // disabling lint error because we're not using this 'data' variable quite as suggested, but I want to remember it's here
   // eslint-disable-next-line
   const [pushSighting, { data }] = useMutation(PUSH_SIGHTINGS);
   const [sightingObject, setSightingObject] = useState({});
+  const [showModal, setShowModal] = useState(false);
 
   function collectWitness(event) {
     setSightingObject({
@@ -41,47 +45,25 @@ function Contact() {
       ...sightingObject,
       location: suggest,
     });
-    console.log(sightingObject);
   }
   function collectDescription(event) {
     setSightingObject({
       ...sightingObject,
       description: event.target.value,
     });
-    console.log(sightingObject);
   }
   function collectEmail(event) {
     setSightingObject({
       ...sightingObject,
       email: event.target.value,
     });
-    console.log(sightingObject);
   }
 
   async function handleSubmit(event) {
-    const encode = (data) => {
-      return Object.keys(data)
-        .map(
-          (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
-        )
-        .join("&");
-    };
-
-    await pushSighting({ variables: { sighting: sightingObject } })
-      .then(
-        fetch("../success", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: encode({ "form-name": "contact", sightingObject }),
-        })
-          .then(() => alert("Success!"))
-          .catch((error) => alert(error))
-      )
-      .catch((err) => {
-        console.log(err);
-      });
-
+    // need to prevent default or else the page will reload before the data gets sent to mongo
     event.preventDefault();
+    await pushSighting({ variables: { sighting: sightingObject } })
+      .then(setShowModal(true))
   }
 
   return (
@@ -96,18 +78,7 @@ function Contact() {
             gentrify.
           </p>
         </div>
-        <form
-          onSubmit={handleSubmit}
-          name="contact"
-          method="POST"
-          netlify-honeypot="bot-field"
-          data-netlify="true"
-        >
-          <p class="hidden">
-            <label>
-              Don’t fill this out if you're human: <input name="bot-field" />
-            </label>
-          </p>
+        <form onSubmit={handleSubmit}>
           <div className="lg:w-1/2 md:w-2/3 mx-auto">
             <div className="flex flex-wrap -m-2">
               <div className="p-2 w-1/2">
@@ -169,6 +140,7 @@ function Contact() {
           </div>
         </form>
       </div>
+      {showModal ? <div> <Modal title={"thank you"} toggle={setShowModal} /> </div> : <></>}
     </section>
   );
 }
