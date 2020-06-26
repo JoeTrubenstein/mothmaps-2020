@@ -69,7 +69,7 @@ function Contact() {
 
     await pushSighting({ variables: { sighting: sightingObject } })
       .then(
-        fetch("/", {
+        fetch("../", {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
           body: encode({ "form-name": "contact", sightingObject }),
