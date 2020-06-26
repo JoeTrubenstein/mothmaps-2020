@@ -132,7 +132,7 @@ function MapSection(props) {
                 {
                   featureType: 'water',
                   elementType: 'geometry',
-                  stylers: [{color: '#17263c'}]
+                  stylers: [{color: '#1A212C'}]
                 },
                 {
                   featureType: 'water',
@@ -142,7 +142,7 @@ function MapSection(props) {
                 {
                   featureType: 'water',
                   elementType: 'labels.text.stroke',
-                  stylers: [{color: '#17263c'}]
+                  stylers: [{color: '#2D3848'}]
                 }
               ]
             }}

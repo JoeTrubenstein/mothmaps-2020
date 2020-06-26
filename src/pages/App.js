@@ -5,14 +5,13 @@ import Footer from "../components/footer"
 import Header from "../components/header"
 import Cards from "../components/cards"
 import MapSection from "../components/mapSection"
-
 function App() {
   return (
     <div>
       <Header />
       <Hero />
       <Cards />
-      <MapSection/>
+      <MapSection />
       <Contact />
       <Footer />
     </div>

@@ -47,17 +47,15 @@ function Modal(props) {
               </svg>
             </div>
           </div>
-          <p>Modal content can go here</p>
-          <p>...</p>
-          <p>...</p>
-          <p>...</p>
-          <p>...</p>
+          <p>{props.message || props.data.submitDate}</p>
+          <br/>
+          <p>{props.signoff || props.data.description}</p>
           <div className="flex justify-end pt-2">
             <button
               onClick={() => {
                 toggleOff();
               }}
-              className="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400"
+              className="modal-close px-4 bg-teal-500 p-3 rounded-lg text-white hover:bg-teal-400"
             >
               Close
             </button>

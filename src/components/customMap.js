@@ -32,7 +32,7 @@ class CustomMap extends Component {
 
   render() {
     return (
-      <div style={{ width: `100%`, height: `70vh`, borderRadius: `25px` }} id={this.props.id} />
+      <div style={{ width: `100%`, height: `70vh`, borderRadius: `25px`, border: `1px solid #4A5667` }} id={this.props.id} />
     );
   }
 }

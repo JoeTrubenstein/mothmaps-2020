@@ -143,7 +143,7 @@ function Contact() {
       {showModal ? (
         <div>
           {" "}
-          <Modal title={"thank you"} toggle={setShowModal} />{" "}
+          <Modal title={"Thank you!"} message={"We've received your submission and will notify you once it's approved and posted to the map."} signoff={"keep your eyes to the skies"} toggle={setShowModal} />{" "}
         </div>
       ) : (
         <></>
