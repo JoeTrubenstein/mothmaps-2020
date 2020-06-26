@@ -6,6 +6,7 @@ import { Route, BrowserRouter as Router } from "react-router-dom";
 import { ApolloProvider } from "react-apollo";
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 import { setContext } from "@apollo/link-context";
+import Success from "./pages/success";
 
 const httpLink = createHttpLink({
   uri: "https://stitch.mongodb.com/api/client/v2.0/app/mothmaps-kicwt/graphql",
@@ -32,6 +33,7 @@ const routing = (
     <Router>
       <div>
         <Route exact path="/" component={App} />
+        <Route exact path="/success" component={Success} />
       </div>
     </Router>
   </ApolloProvider>
