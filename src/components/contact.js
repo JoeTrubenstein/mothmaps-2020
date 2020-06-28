@@ -71,11 +71,10 @@ function Contact() {
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-col text-center w-full mb-12">
           <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">
-            Contact Us
+            Report a Sighting
           </h1>
           <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-            Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical
-            gentrify.
+            All submissions will be taken seriously and will be responded to as quickly as possible.
           </p>
         </div>
         <form onSubmit={handleSubmit}>
@@ -129,6 +128,7 @@ function Contact() {
                 </button>
               </div>
               <div className="p-2 w-full pt-8 mt-8 border-t border-gray-800 text-center">
+                contact the developer <br></br>
                 <a
                   href="mailto: josephtrubenstein@gmail.com"
                   className="text-teal-500"

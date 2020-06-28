@@ -6,7 +6,7 @@ import "../assets/header.css";
 
 function Burger() {
   return (
-    <Menu>
+    <Menu >
         <AnchorLink href="#sights">Sightings</AnchorLink>
         <br/>
         <AnchorLink href="#map">Map</AnchorLink>
