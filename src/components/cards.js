@@ -48,7 +48,7 @@ function Cards() {
   }, [getSightings]);
 
   return (
-    <section className="text-gray-500 bg-gray-900 body-font">
+    <section id="sights" className="text-gray-500 bg-gray-900 body-font">
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-wrap -mx-4 -my-8">
           {data ? (

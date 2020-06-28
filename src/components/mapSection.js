@@ -56,7 +56,7 @@ function MapSection(props) {
   }, [getSightings]);
 
   return (
-    <section className="bg-gray-900 lg:p-12 md:p-4 sm:p-2">
+    <section id="map" className="bg-gray-900 lg:p-12 md:p-4 sm:p-2">
       {/* Child components, such as markers, info windows, etc. */}
       {data ? (
         <div>
