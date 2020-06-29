@@ -13,11 +13,12 @@ function NavBar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
-              <div className="flex-shrink-0">
-                {/* <span className="text-3xl">💻</span> */}
-              </div>
+              <div className="flex-shrink-0"></div>
               <div className="hidden md:block">
                 <div className="font-display ml-10 flex items-baseline">
+                  <span className="text-teal-500 ml-4 px-3 py-2 rounded-md text-sm font-medium text-white focus:outline-none focus:text-white focus:bg-gray-700">
+                    MothMaps
+                  </span>
                   <AnchorLink
                     href="#sights"
                     className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-white hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
