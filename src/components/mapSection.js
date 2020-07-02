@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useLazyQuery } from "@apollo/react-hooks";
+import React, { useState} from "react";
+import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
-import axios from "axios";
 import Modal from "./modal";
 import CustomMap from "./customMap";
 
@@ -20,10 +19,8 @@ const THE_SIGHTINGS = gql`
 `;
 
 function MapSection(props) {
-  // we need to use a LazyQuery or else apollo will try to fetch our data before our auth token is refreshed - causing a 401
 
-  const [getSightings, { loading, error, data }] = useLazyQuery(THE_SIGHTINGS);
-
+  const { loading, error, data } = useQuery(THE_SIGHTINGS);
   if (loading) console.log("fetching gql data");
   if (error) console.log(error);
 
@@ -35,25 +32,6 @@ function MapSection(props) {
     setShowModal(true);
   }
 
-  useEffect(() => {
-    const refreshToken = async () => {
-      axios
-        .post(
-          "https://realm.mongodb.com/api/client/v2.0/app/mothmaps-kicwt/auth/providers/api-key/login",
-          { key: process.env.REACT_APP_SIGHT_KEY }
-        )
-        .then((res) => {
-          console.log("refreshing your access token");
-          localStorage.setItem("token", res.data.access_token);
-          // only once our fresh token is in local storage will apollo try to fetch our data
-          getSightings();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    refreshToken();
-  }, [getSightings]);
 
   return (
     <section id="map"className="bg-gray-900 lg:p-12 md:p-4 sm:p-2">
@@ -156,7 +134,6 @@ function MapSection(props) {
                 marker.addListener("click", (e) => {
                   toggleModal(sight);
                 });
-                console.log(sight.location);
               });
             }}
           />

@@ -1,51 +1,11 @@
-import React, { useEffect } from "react";
-import { useLazyQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
-import axios from "axios";
-
-const THE_SIGHTINGS = gql`
-  query {
-    sightings(query: { isApproved: true }, limit: 3, sortBy: SEENDATE_DESC) {
-      _id
-      description
-      imageUrl
-      isApproved
-      seenDate
-      submitDate
-      witness
-      location {
-        lat
-        lng
-      }
-    }
-  }
-`;
+import React from "react";
+import { useQuery } from "@apollo/react-hooks";
+import { FIND_SIGHTINGS } from "../graphql/operations";
 
 function Cards() {
-  // we need to use a LazyQuery or else apollo will try to fetch our data before our auth token is refreshed - causing a 401
-  const [getSightings, { loading, error, data }] = useLazyQuery(THE_SIGHTINGS);
+  const { loading, error, data } = useQuery(FIND_SIGHTINGS);
   if (loading) console.log("fetching gql data");
   if (error) console.log(error);
-
-  useEffect(() => {
-    const refreshToken = async () => {
-      axios
-        .post(
-          "https://realm.mongodb.com/api/client/v2.0/app/mothmaps-kicwt/auth/providers/api-key/login",
-          { key: process.env.REACT_APP_SIGHT_KEY }
-        )
-        .then((res) => {
-          console.log("refreshing your access token");
-          localStorage.setItem("token", res.data.access_token);
-          // only once our fresh token is in local storage will apollo try to fetch our data
-          getSightings();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    refreshToken();
-  }, [getSightings]);
 
   return (
     <section id="sights" className="text-gray-500 bg-gray-900 body-font">
