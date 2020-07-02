@@ -134,7 +134,6 @@ function MapSection(props) {
                 marker.addListener("click", (e) => {
                   toggleModal(sight);
                 });
-                console.log(sight.location);
               });
             }}
           />

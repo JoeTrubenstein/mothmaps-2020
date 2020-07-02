@@ -12,7 +12,7 @@ import App from "./pages/App";
 import "./assets/main.css"
 //
 // Once your app is set up, replace the value of APP_ID with your App ID
-export const APP_ID = "mothmaps2020-tfpod";
+export const APP_ID = "mothmaps-kicwt";
 
 const app = new RealmWeb.App({
   id: APP_ID,
@@ -22,15 +22,16 @@ const app = new RealmWeb.App({
 // Add an Authorization header with a valid user access token to all GraphQL requests
 const authorizationHeaderLink = setContext(async (_, { headers }) => {
   if (app.currentUser) {
+    // Replaced with another logIn() function - the refresh function returned "not implemented error"
     // Refreshing custom data also refreshes the access token
-    await app.currentUser.refreshCustomData();
+    await app.logIn(RealmWeb.Credentials.anonymous());
   } else {
     // If no user is logged in, log in an anonymous user
     await app.logIn(RealmWeb.Credentials.anonymous());
   }
   // Get a valid access token for the current user
   const { accessToken } = app.currentUser;
-  console.log("currentUser", accessToken);
+  console.log("anon login successful");
 
   // Set the Authorization header, preserving any other headers
   return {

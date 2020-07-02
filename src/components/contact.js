@@ -37,7 +37,6 @@ function Contact() {
         minute: "2-digit",
       }).format(timestamp),
     });
-    console.log(sightingObject);
   }
   function collectLocation(suggest) {
     setSightingObject({

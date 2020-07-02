@@ -1,14 +1,11 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
-import { FIND_SIGHTINGS} from "../graphql/operations";
-
-
+import { FIND_SIGHTINGS } from "../graphql/operations";
 
 function Cards() {
   const { loading, error, data } = useQuery(FIND_SIGHTINGS);
   if (loading) console.log("fetching gql data");
   if (error) console.log(error);
-
 
   return (
     <section id="sights" className="text-gray-500 bg-gray-900 body-font">
