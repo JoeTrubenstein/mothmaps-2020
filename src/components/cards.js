@@ -36,7 +36,7 @@ function Cards() {
                       <p className="leading-relaxed mb-5">
                         {sight.description}
                       </p>
-                      <a href="../" className="inline-flex items-center">
+                      <div className="inline-flex items-center">
                         <img
                           alt="blog"
                           src="https://dummyimage.com/103x103"
@@ -47,7 +47,7 @@ function Cards() {
                             {sight.witness}
                           </span>
                         </span>
-                      </a>
+                      </div>
                     </div>
                   </div>
                 </div>
